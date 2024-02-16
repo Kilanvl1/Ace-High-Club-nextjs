@@ -1,17 +1,17 @@
 <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_86_2)">
 <circle cx="75" cy="75" r="75" fill="url(#paint0_linear_86_2)"/>
-<rect x="74.514" y="82.2256" width="17.0362" height="17.8391" transform="rotate(-135 74.514 82.2256)" fill="#181818"/>
-<ellipse cx="81.1943" cy="76.2968" rx="7.51597" ry="8.91955" transform="rotate(-135 81.1943 76.2968)" fill="#181818"/>
-<rect x="62.8361" y="69.335" width="17.0362" height="17.8391" transform="rotate(-45 62.8361 69.335)" fill="#181818"/>
-<ellipse cx="68.7645" cy="76.0152" rx="7.51597" ry="8.91955" transform="rotate(-45 68.7645 76.0152)" fill="#181818"/>
-<path d="M74.7619 85.6191L79.7106 91.3334H69.8132L74.7619 85.6191Z" fill="#181818"/>
-<rect x="50.5" y="38.5" width="49" height="73.2857" rx="9.5" stroke="#181818"/>
+<rect width="25.0399" height="26.2201" transform="matrix(-0.692767 -0.721162 0.692767 -0.721162 74.3003 85.2952)" fill="#181818"/>
+<ellipse cx="11.047" cy="13.11" rx="11.047" ry="13.11" transform="matrix(-0.692767 -0.721162 0.692767 -0.721162 82.4906 93.8289)" fill="#181818"/>
+<rect width="25.0399" height="26.2201" transform="matrix(0.692767 -0.721162 0.692767 0.721162 57.484 65.9719)" fill="#181818"/>
+<ellipse cx="11.047" cy="13.11" rx="11.047" ry="13.11" transform="matrix(0.692767 -0.721162 0.692767 0.721162 49.2858 74.4978)" fill="#181818"/>
+<path d="M74.6572 90.3823L81.7833 98.9482H67.531L74.6572 90.3823Z" fill="#181818"/>
+<rect x="39.5" y="19.5" width="71" height="110.356" rx="9.5" stroke="#181818"/>
 </g>
 <defs>
 <linearGradient id="paint0_linear_86_2" x1="150" y1="75" x2="0" y2="75" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FFD700"/>
-<stop offset="1" stop-color="#FFDF00" stop-opacity="0.2"/>
+<stop offset="1" stop-color="#FFDF00" stop-opacity="0.4"/>
 </linearGradient>
 <clipPath id="clip0_86_2">
 <rect width="150" height="150" fill="white"/>

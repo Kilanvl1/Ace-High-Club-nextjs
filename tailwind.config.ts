@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const colors = require("tailwindcss/colors");
 
 const config: Config = {
   content: [
@@ -8,17 +9,19 @@ const config: Config = {
   ],
   theme: {
     colors: {
+      white: colors.white,
+      black: colors.black,
       gold: {
         100: "#FFD700",
-        200: "FFDF00",
-        300: "F6C324",
+        200: "#FFDF00",
+        300: "#F6C324",
+        400: "#D1A227",
       },
+      
     },
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'dice': "url('../public/dice.jpg')",
       },
     },
   },

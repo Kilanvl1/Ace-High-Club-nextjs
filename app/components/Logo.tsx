@@ -10,18 +10,21 @@ type LogoProps = {
 };
 
 export const Logo = ({
-  width = 50,
-  height = 50,
+  width = 32,
+  height = 32,
   className = "",
 }: LogoProps) => {
   let src = logo;
   return (
-    <Image
-      src={src}
-      alt="Ace High Club"
-      width={width}
-      height={height}
-      className={className}
-    />
+    <div className="flex items-center gap-2">
+      <Image
+        src={src}
+        alt="Ace High Club"
+        width={width}
+        height={height}
+        className={className}
+      />
+      <h1 className="font-semibold text-xl">Ace High Club</h1>
+    </div>
   );
 };
