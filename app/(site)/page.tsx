@@ -17,7 +17,8 @@ const WelcomeMessage = () => {
   return (
     <div className="relative top-1/4 flex flex-col gap-y-4 pl-10">
       <h1 className="font-medium text-5xl leading-tight">
-        Welcome to <br /> the Ace High Club
+        Welcome to the <br />
+        Ace High Club
       </h1>
       <p className="text-xl">{subTitle}</p>
     </div>

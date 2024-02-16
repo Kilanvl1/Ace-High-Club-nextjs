@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "class-variance-authority";
 
 type ButtonProps = {
   label?: string;
