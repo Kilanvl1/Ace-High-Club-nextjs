@@ -6,3 +6,10 @@ export type ListPageWithChildren = {
     deatil_url: string;
   };
 };
+
+export type DisplayFunctionalityData = {
+  id: number;
+  title: string;
+  subTitle: string;
+  image: string;
+};

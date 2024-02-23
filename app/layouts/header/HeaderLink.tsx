@@ -18,7 +18,7 @@ export const HeaderLink = ({
   return (
     <Link
       href={href}
-      className="flex items-center px-4 py-2 text-lg font-medium leading-none text-gray-900 hover:underline"
+      className="flex items-center px-4 py-2 text-md font-medium leading-none text-gray-900 lg:hover:text-mainGold lg:transition-colors"
     >
       <div className="flex items-center gap-x-2">
         {Icon && <Icon className={cn(iconClassNames)} />}

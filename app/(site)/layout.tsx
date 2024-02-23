@@ -1,3 +1,4 @@
+import { Footer } from "../layouts/footer/Footer";
 import Header from "../layouts/header/header";
 
 export default function SiteLayout({
@@ -35,6 +36,7 @@ export default function SiteLayout({
     <>
       <Header menuPages={menuPages} />
       {children}
+      <Footer />
     </>
   );
 }

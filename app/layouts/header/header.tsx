@@ -1,11 +1,13 @@
 import React from "react";
-import { ColorChanginHeader } from "./ColorChanginHeader";
 import ContainerNew from "@/app/components/ContainerNew";
 import Link from "next/link";
 import { Logo } from "@/app/components/Logo";
 import { MobileMenuDialog } from "./MobileMenuDialog";
 import { DesktopMenu } from "./DesktopMenu";
 import { ListPageWithChildren } from "@/app/wagtail/nextjs";
+import { Button } from "@/app/components/buttons/Button";
+import { HeaderLink } from "./HeaderLink";
+import { cn } from "@/utilities/styles/utils";
 
 type HeaderProps = {
   menuPages: ListPageWithChildren[];
@@ -13,10 +15,15 @@ type HeaderProps = {
 
 const Header = ({ menuPages }: HeaderProps) => {
   return (
-    <ColorChanginHeader>
-      <ContainerNew as="nav" className="py-4 flex items-center justify-between">
+    <header className="fixed top-0 left-0 w-full backdrop-blur-[10px] z-10">
+      <ContainerNew
+        as="nav"
+        className={cn(
+          "py-4 flex items-center justify-between h-[var(--navigation-height)]"
+        )}
+      >
         <div>
-          <Link href="/">
+          <Link href="/" className="lg:hover:text-mainGold">
             <Logo />
           </Link>
         </div>
@@ -26,8 +33,13 @@ const Header = ({ menuPages }: HeaderProps) => {
           <MobileMenuDialog menuPages={menuPages} />
         </div>
         <DesktopMenu menuPages={menuPages} />
+        <div className=" gap-x-4 hidden lg:flex">
+          {/* <HeaderLink href="login" title="Login" /> */}
+          <Button variant="secondary">Login</Button>
+          <Button>Sign up</Button>
+        </div>
       </ContainerNew>
-    </ColorChanginHeader>
+    </header>
   );
 };
 

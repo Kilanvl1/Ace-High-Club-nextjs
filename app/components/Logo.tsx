@@ -24,7 +24,7 @@ export const Logo = ({
         height={height}
         className={className}
       />
-      <h1 className="font-semibold text-xl">Ace High Club</h1>
+      <h1 className="font-semibold text-md">Ace High Club</h1>
     </div>
   );
 };
