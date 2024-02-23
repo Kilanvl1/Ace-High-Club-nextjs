@@ -39,10 +39,7 @@ const displayFunctionalityData = [
 
 export const FunctionalityContainer = () => {
   return (
-    <ContainerNew
-      as="section"
-      className="pt-32 bg-background-gradient-to-right 2xl:bg-background-gradient-big-screen "
-    >
+    <>
       {displayFunctionalityData.map((functionality, index) => (
         <DisplayFunctionality
           key={functionality.id}
@@ -50,6 +47,6 @@ export const FunctionalityContainer = () => {
           even={index % 2 === 0}
         />
       ))}
-    </ContainerNew>
+    </>
   );
 };

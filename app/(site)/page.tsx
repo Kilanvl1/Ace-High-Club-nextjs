@@ -3,6 +3,7 @@ import ContainerNew from "../components/ContainerNew";
 import { Hero, HeroSubtitle, HeroTitle } from "../components/Hero";
 import { Button } from "../components/buttons/Button";
 import { FunctionalityContainer } from "../components/FunctionalityContainer";
+import { Login } from "../components/Login";
 
 export default function Home() {
   return (
@@ -21,8 +22,13 @@ export default function Home() {
           <Button size="large">Get Started</Button>
         </Hero>
       </ContainerNew>
-
-      <FunctionalityContainer />
+      <ContainerNew
+        as="section"
+        className="bg-background-gradient-to-right 2xl:bg-background-gradient-big-screen pt-32"
+      >
+        <FunctionalityContainer />
+        <Login />
+      </ContainerNew>
     </>
   );
 }

@@ -1,5 +1,6 @@
+import ContainerNew from "@/app/components/ContainerNew";
 import React from "react";
 
 export const Footer = () => {
-  return <div>Footer</div>;
+  return <ContainerNew>Footer</ContainerNew>;
 };
