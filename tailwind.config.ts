@@ -14,6 +14,7 @@ const config: Config = {
       black: colors.black,
       mainGold: "#dbab58",
       bgColor: "rgba(44,44,44,.923)",
+      "red-600": "rgb(220 38 38)",
     },
     fontSize: {
       sm: "0.875rem",
