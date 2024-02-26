@@ -1,11 +1,18 @@
-import Image from "next/image";
+"use client";
 import ContainerNew from "../components/ContainerNew";
 import { Hero, HeroSubtitle, HeroTitle } from "../components/Hero";
 import { Button } from "../components/buttons/Button";
 import { FunctionalityContainer } from "../components/FunctionalityContainer";
 import { Login } from "../components/Login";
+import { useRef } from "react";
 
 export default function Home() {
+  const loginRef = useRef<HTMLDivElement>(null);
+  const focusLogin = () => {
+    if (loginRef.current) {
+      loginRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
       <ContainerNew
@@ -19,7 +26,9 @@ export default function Home() {
           <HeroSubtitle>
             The easiest way to organize your poker cash games!
           </HeroSubtitle>
-          <Button size="large">Get Started</Button>
+          <Button size="large" onClick={focusLogin}>
+            Get Started
+          </Button>
         </Hero>
       </ContainerNew>
       <ContainerNew
@@ -27,7 +36,7 @@ export default function Home() {
         className="bg-background-gradient-to-right 2xl:bg-background-gradient-big-screen pt-32"
       >
         <FunctionalityContainer />
-        <Login />
+        <Login ref={loginRef} />
       </ContainerNew>
     </>
   );

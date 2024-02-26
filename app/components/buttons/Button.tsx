@@ -29,6 +29,8 @@ const buttonClassess = cva("rounded-full inline-flex items-center", {
 
 export const Button = ({ children, onClick, variant, size }: ButtonProps) => {
   return (
-    <button className={buttonClassess({ variant, size })}>{children}</button>
+    <button onClick={onClick} className={buttonClassess({ variant, size })}>
+      {children}
+    </button>
   );
 };
