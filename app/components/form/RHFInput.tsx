@@ -33,13 +33,13 @@ export const RHFInput = forwardRef<HTMLInputElement, RHFInputProps>(
                 type={type}
                 id={id}
                 onBlur={onBlur}
-                onChange={(val) =>
+                onChange={(val) => {
                   onChange(
                     type === "number"
                       ? Number(val.target.value)
                       : val.target.value
-                  )
-                }
+                  );
+                }}
                 value={value || ""}
                 className={cn({ "border-red-600": error })}
                 Icon={Icon}
