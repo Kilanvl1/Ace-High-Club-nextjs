@@ -15,6 +15,7 @@ const config: Config = {
       mainGold: "#dbab58",
       bgColor: "rgba(44,44,44,.923)",
       "red-600": "rgb(220 38 38)",
+      brownColor: "#15120b",
     },
     fontSize: {
       sm: "0.875rem",
