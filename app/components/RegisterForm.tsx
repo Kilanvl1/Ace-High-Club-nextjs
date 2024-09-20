@@ -8,8 +8,12 @@ import { RHFInput } from "./form/RHFInput";
 import { z } from "zod";
 import { useEmailSchema } from "./form/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { createUser } from "../_services/users";
+import { storeToken } from "../_services/auth";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const schema = z.object({
     username: z.string({ required_error: "Username is required" }),
     email: useEmailSchema(),
@@ -30,7 +34,14 @@ const RegisterForm = () => {
     formState: { isValid, isSubmitting },
   } = formMethods;
 
-  const onSubmit: SubmitHandler<any> = () => {};
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const {
+      tokens: { refresh, access },
+    } = await createUser(data);
+    storeToken(access, "access");
+    storeToken(refresh, "refresh");
+    router.push("/dashboard");
+  };
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,6 +66,7 @@ const RegisterForm = () => {
           placeholder="Password"
           type="password"
         />
+        <button type="submit">Submit</button>
       </form>
     </FormProvider>
   );

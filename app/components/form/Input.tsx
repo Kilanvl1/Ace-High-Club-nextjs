@@ -6,7 +6,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   type?: string;
   Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
-/* Why the spread operator on props here? */
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, placeholder, type, Icon, ...props }, ref) => (
     <div
