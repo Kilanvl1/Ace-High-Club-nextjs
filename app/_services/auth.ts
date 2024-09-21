@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import apiClient from "./api";
+import { LoginRequest, LoginResponse } from "@/types/auth";
 /**
  * Stores a token in cookies.
  * @param {string} token - The token to be stored.
@@ -15,7 +16,12 @@ const storeToken = (token: string, type: "access" | "refresh") => {
  * @returns {string | undefined} The token, if found.
  */
 const getToken = (type: string) => {
-  return Cookies.get(type + "Token");
+  const token = Cookies.get(type + "Token");
+  if (token === "undefined") {
+    removeTokens();
+    return undefined;
+  }
+  return token;
 };
 
 /**
@@ -27,17 +33,21 @@ const removeTokens = () => {
 };
 
 // Verify credentials and return an access and refresh token
-const login = (
-  username: string,
-  password: string
-): Promise<{ access: string; refresh: string }> => {
-  return apiClient<
-    { username: string; password: string },
-    { access: string; refresh: string }
-  >("/token/", "POST", {
-    username,
-    password,
-  });
+const login = async ({
+  username,
+  password,
+}: LoginRequest): Promise<LoginResponse> => {
+  const response = await apiClient<LoginRequest, LoginResponse>(
+    "/token/",
+    "POST",
+    {
+      username,
+      password,
+    }
+  );
+  storeToken(response.access, "access");
+  storeToken(response.refresh, "refresh");
+  return response;
 };
 
 const logout = () => {

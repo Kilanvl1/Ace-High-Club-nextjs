@@ -43,9 +43,10 @@ export async function apiClient<TRequest, TResponse>(
       } catch {
         error.data = await response.text();
       }
-      console.log(error.data);
+
       if (response.status === 401 && getToken("refresh") && url !== "/token/") {
         // Token might have expired, attempt to refresh
+        console.log("Refreshing token", getToken("refresh"));
         try {
           const { access } = (await handleJWTRefresh()) as { access: string };
           storeToken(access, "access");
@@ -60,7 +61,7 @@ export async function apiClient<TRequest, TResponse>(
       throw error;
     }
 
-    return response.json();
+    return response.json() as Promise<TResponse>;
   } catch (error) {
     throw error;
   }

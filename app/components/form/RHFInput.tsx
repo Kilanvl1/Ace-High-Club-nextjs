@@ -2,7 +2,6 @@ import { ReactNode, forwardRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Input, InputProps } from "./Input";
 import { FormGroup } from "./FormGroup";
-import { cn } from "@/utilities/styles/utils";
 
 export type RHFInputProps = InputProps & {
   id?: string;
@@ -29,6 +28,7 @@ export const RHFInput = forwardRef<HTMLInputElement, RHFInputProps>(
             fieldState: { error },
           }) => (
             <>
+              {/* {error && <p className="text-destructive">{error.message}</p>} */}
               <Input
                 type={type}
                 id={id}
@@ -41,11 +41,11 @@ export const RHFInput = forwardRef<HTMLInputElement, RHFInputProps>(
                   );
                 }}
                 value={value || ""}
-                className={cn({ "border-red-600": error })}
                 Icon={Icon}
                 placeholder={placeholder}
                 ref={ref}
                 {...other}
+                error={error?.message}
               />
             </>
           )}

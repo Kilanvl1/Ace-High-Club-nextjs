@@ -6,23 +6,28 @@ import {
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { RHFInput } from "./form/RHFInput";
 import { z } from "zod";
-import { useEmailSchema } from "./form/schema";
+import {
+  useEmailSchema,
+  usePasswordSchema,
+  useUsernameSchema,
+} from "./form/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUser } from "../_services/users";
 import { storeToken } from "../_services/auth";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const RegisterForm = () => {
   const router = useRouter();
   const schema = z.object({
-    username: z.string({ required_error: "Username is required" }),
+    username: useUsernameSchema(),
     email: useEmailSchema(),
-    password: z.string({ required_error: "Password is required" }),
+    password: usePasswordSchema(),
   });
   type FormData = z.infer<typeof schema>;
   const formMethods = useForm<FormData>({
     resolver: zodResolver(schema),
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       username: "",
       email: "",
@@ -35,12 +40,16 @@ const RegisterForm = () => {
   } = formMethods;
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const {
-      tokens: { refresh, access },
-    } = await createUser(data);
-    storeToken(access, "access");
-    storeToken(refresh, "refresh");
-    router.push("/dashboard");
+    try {
+      const {
+        tokens: { refresh, access },
+      } = await createUser(data);
+      storeToken(access, "access");
+      storeToken(refresh, "refresh");
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <FormProvider {...formMethods}>
@@ -51,6 +60,7 @@ const RegisterForm = () => {
           Icon={UserIcon}
           placeholder="Username"
           autoComplete="name"
+          required
         />
         <RHFInput
           label=""
@@ -58,6 +68,7 @@ const RegisterForm = () => {
           Icon={EnvelopeIcon}
           placeholder="Email"
           autoComplete="email"
+          required
         />
         <RHFInput
           label=""
@@ -65,8 +76,11 @@ const RegisterForm = () => {
           Icon={LockClosedIcon}
           placeholder="Password"
           type="password"
+          required
         />
-        <button type="submit">Submit</button>
+        <Button size="lg" disabled={isSubmitting || !isValid}>
+          Register
+        </Button>
       </form>
     </FormProvider>
   );

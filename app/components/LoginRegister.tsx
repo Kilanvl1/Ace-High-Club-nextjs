@@ -5,7 +5,7 @@ import { useState, forwardRef, Dispatch, SetStateAction } from "react";
 const LoginRegister = forwardRef<HTMLDivElement>((props, ref) => {
   const [isOnLoginPage, setIsOnLoginPage] = useState(true); //Variable to show either login or registration form
   return (
-    <div ref={ref} className="max-w-96 mx-auto">
+    <div ref={ref} className="max-w-96 mx-auto mb-10">
       {isOnLoginPage ? <Login /> : <Register />}
       <PromptMessage
         isOnLoginPage={isOnLoginPage}
@@ -25,7 +25,7 @@ const PromptMessage = ({
   setIsOnLoginPage,
 }: PromptMessageProps) => {
   return (
-    <div>
+    <div className="mt-4">
       {isOnLoginPage ? (
         <div>
           New here? &nbsp;

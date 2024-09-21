@@ -6,38 +6,41 @@ import { RHFInput } from "./form/RHFInput";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login, storeToken } from "../_services/auth";
-
+import { login } from "../_services/auth";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useUsernameSchema, usePasswordSchema } from "./form/schema";
 export const LoginForm = () => {
+  const router = useRouter();
   const [error, setError] = useState("");
+
   const schema = z.object({
-    username: z.string({ required_error: "Username is required" }),
-    password: z.string({ required_error: "Password is required" }),
+    username: useUsernameSchema(),
+    password: usePasswordSchema(),
   });
+
   type FormData = z.infer<typeof schema>;
   const formMethods = useForm<FormData>({
     resolver: zodResolver(schema),
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       username: "",
       password: "",
     },
   });
+
   const {
     handleSubmit,
     formState: { isValid, isSubmitting },
   } = formMethods;
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const { username, password } = data;
+
     try {
-      const response = await login(data.username, data.password);
-      console.log(response);
-      const { access, refresh } = response as {
-        access: string;
-        refresh: string;
-      };
-      storeToken(access, "access");
-      storeToken(refresh, "refresh");
+      await login({ username, password });
+
+      router.push("/dashboard");
     } catch (e: any) {
       if (e.status === 401) {
         setError(e.data.detail);
@@ -46,6 +49,7 @@ export const LoginForm = () => {
       }
     }
   };
+
   return (
     <>
       {error && <p>{error}</p>}
@@ -58,6 +62,7 @@ export const LoginForm = () => {
             placeholder="Email"
             autoComplete="email"
           />
+
           <RHFInput
             label=""
             name="password"
@@ -65,7 +70,10 @@ export const LoginForm = () => {
             placeholder="Password"
             type="password"
           />
-          <button type="submit">Submit</button>
+
+          <Button size="lg" disabled={isSubmitting || !isValid}>
+            Login
+          </Button>
         </form>
       </FormProvider>
     </>
