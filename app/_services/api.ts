@@ -44,11 +44,14 @@ export async function apiClient<TRequest, TResponse>(
         error.data = await response.text();
       }
 
-      if (response.status === 401 && getToken("refresh") && url !== "/token/") {
+      const refresh = getToken("refresh");
+
+      if (response.status === 401 && refresh && url !== "/token/") {
         // Token might have expired, attempt to refresh
-        console.log("Refreshing token", getToken("refresh"));
+        console.log("Refreshing token");
+
         try {
-          const { access } = (await handleJWTRefresh()) as { access: string };
+          const { access } = await handleJWTRefresh({ refresh });
           storeToken(access, "access");
           // Retry the original request with the new token
           return apiClient<TRequest, TResponse>(url, method, data);

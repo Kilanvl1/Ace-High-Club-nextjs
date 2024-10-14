@@ -1,6 +1,12 @@
 import Cookies from "js-cookie";
 import apiClient from "./api";
-import { LoginRequest, LoginResponse } from "@/types/auth";
+import {
+  LoginRequest,
+  LoginResponse,
+  RefreshTokenRequest,
+  RefreshTokenResponse,
+} from "@/types/schema";
+
 /**
  * Stores a token in cookies.
  * @param {string} token - The token to be stored.
@@ -55,9 +61,12 @@ const logout = () => {
   return apiClient("/auth/logout/", "POST", { refresh: refreshToken });
 };
 
-const handleJWTRefresh = () => {
-  const refreshToken = getToken("refresh");
-  return apiClient("/token/refresh/", "POST", { refresh: refreshToken });
+const handleJWTRefresh = ({ refresh }: RefreshTokenRequest) => {
+  return apiClient<RefreshTokenRequest, RefreshTokenResponse>(
+    "/token/refresh/",
+    "POST",
+    { refresh }
+  );
 };
 
 export { storeToken, getToken, removeTokens, login, logout, handleJWTRefresh };
