@@ -122,12 +122,18 @@ export interface components {
         };
         Group: {
             readonly id: number;
+            /** @description Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
+            readonly creator: string;
+            /** Format: uri */
+            group_photo?: string;
             name: string;
-            members: number[];
+            members?: (number | null)[];
         };
         GroupRequest: {
+            /** Format: binary */
+            group_photo?: string;
             name: string;
-            members: number[];
+            members?: (number | null)[];
         };
         PatchedCustomUserRequest: {
             password?: string;
@@ -136,8 +142,10 @@ export interface components {
             username?: string;
         };
         PatchedGroupRequest: {
+            /** Format: binary */
+            group_photo?: string;
             name?: string;
-            members?: number[];
+            members?: (number | null)[];
         };
         TokenObtainPair: {
             readonly access: string;
@@ -190,9 +198,8 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["GroupRequest"];
-                "application/x-www-form-urlencoded": components["schemas"]["GroupRequest"];
                 "multipart/form-data": components["schemas"]["GroupRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["GroupRequest"];
             };
         };
         responses: {
@@ -240,9 +247,8 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["GroupRequest"];
-                "application/x-www-form-urlencoded": components["schemas"]["GroupRequest"];
                 "multipart/form-data": components["schemas"]["GroupRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["GroupRequest"];
             };
         };
         responses: {
@@ -289,9 +295,8 @@ export interface operations {
         };
         requestBody?: {
             content: {
-                "application/json": components["schemas"]["PatchedGroupRequest"];
-                "application/x-www-form-urlencoded": components["schemas"]["PatchedGroupRequest"];
                 "multipart/form-data": components["schemas"]["PatchedGroupRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedGroupRequest"];
             };
         };
         responses: {

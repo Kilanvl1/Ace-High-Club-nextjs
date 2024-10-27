@@ -11,24 +11,31 @@ interface ApiError extends Error {
 export async function apiClient<TRequest, TResponse>(
   url: string,
   method: ApiMethod,
-  data?: TRequest
+  data?: TRequest,
+  headers?: Record<string, string>
 ) {
   try {
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-    };
+    // Set default headers if not provided
+    headers = headers
+      ? headers
+      : {
+          "Content-Type": "application/json",
+        };
 
     const accessToken = getToken("access");
     if (accessToken) {
       headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
+    // Convert data to FormData or JSON string if not already
+    const requestBody = data instanceof FormData ? data : JSON.stringify(data);
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`,
       {
         method,
         headers,
-        body: data ? JSON.stringify(data) : undefined,
+        body: requestBody,
         cache: "no-store",
       }
     );
@@ -64,7 +71,7 @@ export async function apiClient<TRequest, TResponse>(
       throw error;
     }
 
-    return response.json() as Promise<TResponse>;
+    return method !== "DELETE" ? response.json() : response.status;
   } catch (error) {
     throw error;
   }

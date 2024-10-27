@@ -27,13 +27,10 @@ paths:
       - groups
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/GroupRequest'
           application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/GroupRequest'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/GroupRequest'
         required: true
@@ -82,13 +79,10 @@ paths:
       - groups
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/GroupRequest'
           application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/GroupRequest'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/GroupRequest'
         required: true
@@ -115,13 +109,10 @@ paths:
       - groups
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedGroupRequest'
           application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedGroupRequest'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedGroupRequest'
       security:
@@ -395,6 +386,14 @@ components:
         id:
           type: integer
           readOnly: true
+        creator:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          readOnly: true
+        group_photo:
+          type: string
+          format: uri
         name:
           type: string
           maxLength: 255
@@ -402,13 +401,17 @@ components:
           type: array
           items:
             type: integer
+            nullable: true
       required:
+      - creator
       - id
-      - members
       - name
     GroupRequest:
       type: object
       properties:
+        group_photo:
+          type: string
+          format: binary
         name:
           type: string
           minLength: 1
@@ -417,8 +420,8 @@ components:
           type: array
           items:
             type: integer
+            nullable: true
       required:
-      - members
       - name
     PatchedCustomUserRequest:
       type: object
@@ -438,6 +441,9 @@ components:
     PatchedGroupRequest:
       type: object
       properties:
+        group_photo:
+          type: string
+          format: binary
         name:
           type: string
           minLength: 1
@@ -446,6 +452,7 @@ components:
           type: array
           items:
             type: integer
+            nullable: true
     TokenObtainPair:
       type: object
       properties:

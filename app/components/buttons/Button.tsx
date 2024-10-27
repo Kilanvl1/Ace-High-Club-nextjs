@@ -1,10 +1,11 @@
 import React from "react";
-
+import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
 interface ButtonProps extends VariantProps<typeof buttonClassess> {
   children: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
 const buttonClassess = cva("rounded-full inline-flex items-center", {
@@ -29,9 +30,18 @@ const buttonClassess = cva("rounded-full inline-flex items-center", {
   },
 });
 
-export const Button = ({ children, onClick, variant, size }: ButtonProps) => {
+export const Button = ({
+  children,
+  onClick,
+  variant,
+  size,
+  className,
+}: ButtonProps) => {
   return (
-    <button onClick={onClick} className={buttonClassess({ variant, size })}>
+    <button
+      onClick={onClick}
+      className={cn(buttonClassess({ variant, size }), className)}
+    >
       {children}
     </button>
   );

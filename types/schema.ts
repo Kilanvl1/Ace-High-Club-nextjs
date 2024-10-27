@@ -5,3 +5,4 @@ export type LoginRequest = components["schemas"]["TokenObtainPairRequest"];
 export type LoginResponse = components["schemas"]["TokenObtainPair"];
 export type RefreshTokenRequest = components["schemas"]["TokenRefreshRequest"];
 export type RefreshTokenResponse = components["schemas"]["TokenRefresh"];
+export type GroupRequest = components["schemas"]["GroupRequest"];
